@@ -3,8 +3,23 @@
 #define LOWEST 48 // 0
 #define HIGHEST 57 // 9
 
+
 int main()
 {
+	// open File
+	FILE *filePointer = fopen("inputData.txt", "r");
+	int fileSize = sizeof *filePointer;
+	printf("Size of File: %d Bytes\n", fileSize);
+
+	// read File
+	char data[fileSize];
+	while(fgets(data, fileSize, filePointer))
+	{
+		printf("%s", data);
+	}
+	fclose(filePointer);
+	printf("Data: %s\n", data);
+
 	// read file
 
 	// store data
@@ -26,7 +41,6 @@ int main()
 			
 			if(current >= LOWEST && current <= HIGHEST)
 			{
-				//printf("%c\n", current);
 				if(first == 'x')
 				{
 					first = current;
@@ -40,7 +54,6 @@ int main()
 			{
 				last = first;
 			}
-			//printf("first= %c last= %c\n", first, last);
 		}
 		else
 		{
