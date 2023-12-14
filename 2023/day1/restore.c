@@ -9,36 +9,21 @@ int main()
 	// open File
 	FILE *filePointer = fopen("inputData.txt", "r");
 	int fileSize = sizeof *filePointer;
-	printf("Size of File: %d Bytes\n", fileSize);
-
-	// read File
 	char data[fileSize];
-	while(fgets(data, fileSize, filePointer))
-	{
-		printf("%s", data);
-	}
-	fclose(filePointer);
-	printf("Data: %s\n", data);
-
-	// read file
-
-	// store data
-	char testdata[] = "1abc2\npqr3stu8vwx\na1b2c3d4e5f\ntreb7uchet\n";
-
+	printf("Size of File: %d Bytes\n", fileSize);
+	
 	char first = 'x';
 	char last = 'x';
 	char current = 'x';
 	int sum = 0;
-	// loop through array
-	for(int i = 0; i < sizeof testdata; i++)
-	{
-		current = testdata[i];
+	int index = 0;
 
-		// before each linebreak find first and last value
-		// when line break accourse calcuete sum and reset first and last
-		if(current != '\n')
+	// read line by line and store each time in data
+	while(fgets(data, fileSize, filePointer))
+	{
+		while(data[index] !='\0')
 		{
-			
+			current = data[index];
 			if(current >= LOWEST && current <= HIGHEST)
 			{
 				if(first == 'x')
@@ -54,15 +39,17 @@ int main()
 			{
 				last = first;
 			}
+			index++;
 		}
-		else
-		{
-			printf("%c%c\n", first, last);
-			sum += 10*((int)first-LOWEST) + ((int)last-LOWEST);
-			first = 'x';
-			last = 'x';
-		}
+		printf("%d\n", sum);
+		index = 0;
+		sum += 10*((int)first-LOWEST) + ((int)last-LOWEST);
+		first = 'x';
+		last = 'x';
 	}
+	fclose(filePointer);
 	printf("%d \n", sum);
 	return 0;
 }
+
+
